@@ -19,6 +19,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    // One Signal Push Notification Setup
+    // Enable to debug issues.
+    // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+    var notificationOpenedCallback = function(jsonData) {
+      console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+    };
+
+    window.plugins.OneSignal.init("<App ID>",
+                                   {googleProjectNumber: "<Sender ID>"},
+                                   notificationOpenedCallback);
+
+    // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.enableInAppAlertNotification(true);
+
   });
 })
 
